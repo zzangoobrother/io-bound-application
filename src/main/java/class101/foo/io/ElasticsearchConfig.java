@@ -22,6 +22,7 @@ public class ElasticsearchConfig {
 
     @Bean
     public RestHighLevelClient getRestClient() {
+
         List<HttpHost> hostList = new ArrayList<>();
         for (String host : hosts) {
             hostList.add(new HttpHost(host, port, "http"));
