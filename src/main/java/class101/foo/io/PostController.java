@@ -40,11 +40,11 @@ public class PostController {
     public Page<Post> getPostList(@RequestParam(defaultValue = "1") Integer page) {
         if (page.equals(1)) {
             return postCacheService.getFirstPostPage();
+        } else {
+            return postRepository.findAll(
+                    PageRequest.of(page - 1, PAGE_SIZE, Sort.by("id").descending())
+            );
         }
-
-        return postRepository.findAll(
-                PageRequest.of(page - 1, PAGE_SIZE, Sort.by("id").descending())
-        );
     }
     
     // 3. 글 번호로 조회
